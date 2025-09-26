@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://4321r7vg01at"]
+[gd_scene load_steps=66 format=3 uid="uid://4321r7vg01at"]
 
 [ext_resource type="Script" uid="uid://c38avlgfxg5n1" path="res://character_body_2d.gd" id="1_bxtwq"]
 [ext_resource type="Texture2D" uid="uid://0qb33ff4juc2" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack1.png" id="3_jo3uf"]
@@ -120,6 +120,38 @@ region = Rect2(1200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_obxnd"]
 atlas = ExtResource("6_gaxew")
+region = Rect2(1400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52jtg"]
+atlas = ExtResource("5_wmnxr")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6macq"]
+atlas = ExtResource("5_wmnxr")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cts3w"]
+atlas = ExtResource("5_wmnxr")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv1dp"]
+atlas = ExtResource("5_wmnxr")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bse4g"]
+atlas = ExtResource("5_wmnxr")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up753"]
+atlas = ExtResource("5_wmnxr")
+region = Rect2(1000, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg2bt"]
+atlas = ExtResource("5_wmnxr")
+region = Rect2(1200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p6oi"]
+atlas = ExtResource("5_wmnxr")
 region = Rect2(1400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3cc8q"]
@@ -302,6 +334,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_52jtg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6macq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cts3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv1dp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bse4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up753")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qg2bt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p6oi")
+}],
+"loop": true,
+"name": &"marche",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3cc8q")
 }, {
 "duration": 1.0,
@@ -380,10 +441,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5e4hh"]
+radius = 53.0
+height = 194.0
+
 [node name="personnage_principal" type="CharacterBody2D"]
 script = ExtResource("1_bxtwq")
 
 [node name="perso_principal" type="AnimatedSprite2D" parent="."]
-position = Vector2(100, 101)
+texture_filter = 1
+position = Vector2(454, 247)
+scale = Vector2(4.5475, 4.5475)
 sprite_frames = SubResource("SpriteFrames_1ynhq")
-animation = &"attaque_02"
+animation = &"marche"
+frame_progress = 0.358713
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(460, 254)
+shape = SubResource("CapsuleShape2D_5e4hh")

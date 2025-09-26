@@ -1,3 +1,42 @@
-[gd_scene format=3 uid="uid://b27xgiruum8pt"]
+[gd_scene load_steps=4 format=3 uid="uid://b27xgiruum8pt"]
+
+[ext_resource type="PackedScene" uid="uid://4321r7vg01at" path="res://scene/personnage_principal.tscn" id="1_itxqv"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_itxqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itxqv"]
+size = Vector2(212, 197)
 
 [node name="Main" type="Node2D"]
+
+[node name="personnage_principal" parent="." instance=ExtResource("1_itxqv")]
+position = Vector2(124, 103)
+
+[node name="Camera2D" type="Camera2D" parent="personnage_principal"]
+position = Vector2(459, 225)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_vertical_offset = -1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(309, 536)
+shape = SubResource("WorldBoundaryShape2D_itxqv")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1049, 386)
+scale = Vector2(1, 2.24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-7.99988, 14.1976)
+shape = SubResource("RectangleShape2D_itxqv")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_left = -119.0
+offset_top = -85.4938
+offset_right = 98.0002
+offset_bottom = 113.506
