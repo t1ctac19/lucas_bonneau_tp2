@@ -107,6 +107,9 @@ func reset_combo():
 	is_attacking = false
 	attack_queued = false
 	combo_timer = 0.0
+	
+func parry():
+	pass
 		
 		
 		

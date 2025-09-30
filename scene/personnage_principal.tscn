@@ -1,6 +1,5 @@
-[gd_scene load_steps=66 format=3 uid="uid://4321r7vg01at"]
+[gd_scene load_steps=67 format=3 uid="uid://4321r7vg01at"]
 
-[ext_resource type="Script" uid="uid://c38avlgfxg5n1" path="res://character_body_2d.gd" id="1_bxtwq"]
 [ext_resource type="Texture2D" uid="uid://0qb33ff4juc2" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack1.png" id="3_jo3uf"]
 [ext_resource type="Texture2D" uid="uid://cu2xxnr4276tv" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack2.png" id="4_i7q2i"]
 [ext_resource type="Texture2D" uid="uid://bxp1kwmeulem8" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Run.png" id="5_wmnxr"]
@@ -8,7 +7,126 @@
 [ext_resource type="Texture2D" uid="uid://qcjwrbqt3fou" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Death.png" id="7_l5qxu"]
 [ext_resource type="Texture2D" uid="uid://b6cb2qo5jmvvs" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Jump.png" id="8_w8415"]
 [ext_resource type="Texture2D" uid="uid://deqrrng5odopf" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Take Hit - white silhouette.png" id="9_6u05i"]
+[ext_resource type="Script" uid="uid://b1jv5io3kdnr2" path="res://script/MyHitBox.gd" id="9_52jtg"]
 [ext_resource type="Texture2D" uid="uid://d2iyug4b164kh" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Fall.png" id="10_m4rk3"]
+
+[sub_resource type="GDScript" id="GDScript_6macq"]
+script/source = "extends CharacterBody2D
+
+
+@export var vitesse_marche = 500.0
+@export var vitesse_course = 750.0
+@export_range(0, 1) var acceleration = 0.2
+@export_range(0, 1) var deceleration = 0.2
+@export var tomber = 20
+
+@export var force_saut = -600
+@export_range(0, 1) var deceleration_saut_relacher = 0.5
+
+@onready var sprite = $perso_principal
+ 
+#en train d'attaquer
+var combo_step = 0
+var is_attacking = false
+var attack_queued = false
+var combo_timer = 0.0
+var combo_max_delay = 0.4
+
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"saut\") and (is_on_floor() or is_on_wall()):
+		velocity.y = force_saut
+	
+	if Input.is_action_just_released(\"saut\") and velocity.y < 0:
+		velocity.y *= deceleration_saut_relacher
+	
+	var vitesse
+	if Input.is_action_pressed(\"course\"):
+		vitesse = vitesse_course
+	else:
+		vitesse = vitesse_marche
+		
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis(\"gauche\", \"droite\")
+	
+	if direction != 0:
+		sprite.flip_h = (direction == -1)
+	
+	if direction:
+		velocity.x = move_toward(velocity.x ,direction * vitesse, vitesse * acceleration )
+	else:
+		velocity.x = move_toward(velocity.x, 0, vitesse_marche * deceleration)
+	update_animation(direction)
+	move_and_slide()
+	
+	
+func update_animation(direction):
+	# Gestion de l'appui sur la touche d'attaque
+	if Input.is_action_just_pressed(\"katana\"):
+		if is_attacking:
+			attack_queued = true  # Enregistre l'intention de combo
+		elif combo_step == 0:
+			start_attack(1)
+
+	# Si une attaque est en cours
+	if is_attacking:
+		if not sprite.is_playing():
+			if attack_queued and combo_step == 1:
+				start_attack(2)  # Enchaîne sur la 2e attaque
+			else:
+				reset_combo()
+		return  # Empêche d'autres animations pendant une attaque
+
+	# Animations normales (hors attaque)
+	if is_on_floor():
+		if direction == 0:
+			sprite.play(\"idle\")
+		else:
+			sprite.play(\"course\")
+	else:
+		if velocity.y < -tomber:
+			sprite.play(\"saut\")  # monte rapidement => saut
+		elif velocity.y > tomber:
+			sprite.play(\"tombe\")  # descend vraiment => chute
+		else:
+			sprite.play(\"saut\")
+
+	# Gestion du temps de combo
+	if combo_step > 0:
+		combo_timer += get_process_delta_time()
+		if combo_timer > combo_max_delay:
+			reset_combo()
+
+func start_attack(step):
+	if is_on_floor():
+		combo_step = step
+		is_attacking = true
+		attack_queued = false
+		combo_timer = 0.0
+		if step == 1:
+			sprite.play(\"attaque_01\")
+		elif step == 2:
+			sprite.play(\"attaque_02\")
+
+func reset_combo():
+	combo_step = 0
+	is_attacking = false
+	attack_queued = false
+	combo_timer = 0.0
+	
+func parry():
+	pass
+		
+		
+		
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wokm2"]
 atlas = ExtResource("3_jo3uf")
@@ -458,7 +576,7 @@ radius = 53.0
 height = 194.0
 
 [node name="personnage_principal" type="CharacterBody2D"]
-script = ExtResource("1_bxtwq")
+script = SubResource("GDScript_6macq")
 
 [node name="perso_principal" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -470,3 +588,8 @@ animation = &"idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(441, 252)
 shape = SubResource("CapsuleShape2D_5e4hh")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("9_52jtg")
