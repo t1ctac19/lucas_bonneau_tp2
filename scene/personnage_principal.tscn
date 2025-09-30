@@ -247,7 +247,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_57arg")
 }],
-"loop": true,
+"loop": false,
 "name": &"attaque_01",
 "speed": 10.0
 }, {
@@ -453,9 +453,9 @@ texture_filter = 1
 position = Vector2(454, 247)
 scale = Vector2(4.5475, 4.5475)
 sprite_frames = SubResource("SpriteFrames_1ynhq")
-animation = &"marche"
-frame_progress = 0.358713
+animation = &"attaque_01"
+frame_progress = 0.516298
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(460, 254)
+position = Vector2(441, 252)
 shape = SubResource("CapsuleShape2D_5e4hh")

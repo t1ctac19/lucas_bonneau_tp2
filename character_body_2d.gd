@@ -9,6 +9,11 @@ extends CharacterBody2D
 @export var force_saut = -600
 @export_range(0, 1) var deceleration_saut_relacher = 0.5
 
+@onready var sprite = $perso_principal
+ 
+#en train d'attaquer
+var action_attaque = false
+
 
 
 func _physics_process(delta: float) -> void:
@@ -32,9 +37,28 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("gauche", "droite")
+	
+	if direction != 0:
+		sprite.flip_h = (direction == -1)
+	
 	if direction:
 		velocity.x = move_toward(velocity.x ,direction * vitesse, vitesse * acceleration )
 	else:
 		velocity.x = move_toward(velocity.x, 0, vitesse_marche * deceleration)
-
+	update_animation(direction)
 	move_and_slide()
+	
+	
+func update_animation(direction):
+	if is_on_floor():
+		if direction == 0:
+			sprite.play("idle")
+		else:
+			sprite.play("course")
+	else:
+		 
+		sprite.play("saut")
+		
+	if Input.is_action_pressed("katana"):
+		sprite.play("attaque_01")
+		
