@@ -229,19 +229,19 @@ region = Rect2(200, 0, 200, 200)
 [sub_resource type="SpriteFrames" id="SpriteFrames_1ynhq"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_wokm2")
 }, {
-"duration": 1.0,
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_m5u73")
 }, {
-"duration": 1.0,
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_281of")
 }, {
-"duration": 1.0,
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_sq6ai")
 }, {
-"duration": 1.0,
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_pka1r")
 }, {
 "duration": 1.0,
@@ -252,25 +252,37 @@ animations = [{
 "speed": 10.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_5p64i")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_01qj5")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_7ef3h")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_so3tq")
 }, {
-"duration": 1.0,
+"duration": 0.7,
 "texture": SubResource("AtlasTexture_vwooj")
 }, {
-"duration": 1.0,
+"duration": 0.4,
 "texture": SubResource("AtlasTexture_cn21b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sq6ai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_281of")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5u73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wokm2")
 }],
-"loop": true,
+"loop": false,
 "name": &"attaque_02",
 "speed": 10.0
 }, {
@@ -453,8 +465,7 @@ texture_filter = 1
 position = Vector2(454, 247)
 scale = Vector2(4.5475, 4.5475)
 sprite_frames = SubResource("SpriteFrames_1ynhq")
-animation = &"attaque_01"
-frame_progress = 0.516298
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(441, 252)
