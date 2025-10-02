@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://4321r7vg01at"]
+[gd_scene load_steps=69 format=3 uid="uid://4321r7vg01at"]
 
 [ext_resource type="Texture2D" uid="uid://0qb33ff4juc2" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack1.png" id="3_jo3uf"]
 [ext_resource type="Texture2D" uid="uid://cu2xxnr4276tv" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack2.png" id="4_i7q2i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bs44e1ufsxhmp" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Idle.png" id="6_gaxew"]
 [ext_resource type="Texture2D" uid="uid://qcjwrbqt3fou" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Death.png" id="7_l5qxu"]
 [ext_resource type="Texture2D" uid="uid://b6cb2qo5jmvvs" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Jump.png" id="8_w8415"]
+[ext_resource type="Script" uid="uid://c6ay880i4ijpr" path="res://script/MyHurtBox.gd" id="9_6macq"]
 [ext_resource type="Texture2D" uid="uid://deqrrng5odopf" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Take Hit - white silhouette.png" id="9_6u05i"]
 [ext_resource type="Script" uid="uid://b1jv5io3kdnr2" path="res://script/MyHitBox.gd" id="9_52jtg"]
 [ext_resource type="Texture2D" uid="uid://d2iyug4b164kh" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Fall.png" id="10_m4rk3"]
@@ -571,6 +572,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cts3w"]
+radius = 21.0856
+height = 75.7339
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5e4hh"]
 radius = 53.0
 height = 194.0
@@ -583,7 +588,18 @@ texture_filter = 1
 position = Vector2(454, 247)
 scale = Vector2(4.5475, 4.5475)
 sprite_frames = SubResource("SpriteFrames_1ynhq")
-animation = &"idle"
+animation = &"attaque_02"
+frame = 4
+frame_progress = 0.962652
+
+[node name="MyHitBox" type="Area2D" parent="perso_principal"]
+script = ExtResource("9_6macq")
+metadata/_custom_type_script = "uid://c6ay880i4ijpr"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="perso_principal/MyHitBox"]
+position = Vector2(57.6141, -5.49753)
+rotation = 1.6028
+shape = SubResource("CapsuleShape2D_cts3w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(441, 252)
