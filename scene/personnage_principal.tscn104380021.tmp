@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://4321r7vg01at"]
+[gd_scene load_steps=69 format=3 uid="uid://4321r7vg01at"]
 
 [ext_resource type="Texture2D" uid="uid://0qb33ff4juc2" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack1.png" id="3_jo3uf"]
 [ext_resource type="Texture2D" uid="uid://cu2xxnr4276tv" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack2.png" id="4_i7q2i"]
@@ -32,7 +32,6 @@ var is_attacking = false
 var attack_queued = false
 var combo_timer = 0.0
 var combo_max_delay = 0.4
-var nombre_saut = 0
 
 
 
@@ -40,13 +39,10 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	else:
-		nombre_saut = 0
 
 	# Handle jump.
-	if Input.is_action_just_pressed(\"saut\") and (is_on_floor() or is_on_wall()) and nombre_saut <= 1:
+	if Input.is_action_just_pressed(\"saut\") and (is_on_floor() or is_on_wall()):
 		velocity.y = force_saut
-		nombre_saut += 1
 	
 	if Input.is_action_just_released(\"saut\") and velocity.y < 0:
 		velocity.y *= deceleration_saut_relacher
@@ -68,8 +64,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x ,direction * vitesse, vitesse * acceleration )
 	else:
 		velocity.x = move_toward(velocity.x, 0, vitesse_marche * deceleration)
-	if is_attacking:
-		velocity.x = 0
 	update_animation(direction)
 	move_and_slide()
 	
@@ -135,20 +129,28 @@ func parry():
 		
 "
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wokm2"]
+atlas = ExtResource("3_jo3uf")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5u73"]
+atlas = ExtResource("3_jo3uf")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_281of"]
+atlas = ExtResource("3_jo3uf")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq6ai"]
+atlas = ExtResource("3_jo3uf")
+region = Rect2(600, 0, 200, 200)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pka1r"]
 atlas = ExtResource("3_jo3uf")
 region = Rect2(800, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_57arg"]
 atlas = ExtResource("3_jo3uf")
-region = Rect2(1000, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vwooj"]
-atlas = ExtResource("4_i7q2i")
-region = Rect2(800, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cn21b"]
-atlas = ExtResource("4_i7q2i")
 region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5p64i"]
@@ -167,21 +169,13 @@ region = Rect2(400, 0, 200, 200)
 atlas = ExtResource("4_i7q2i")
 region = Rect2(600, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sq6ai"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(600, 0, 200, 200)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwooj"]
+atlas = ExtResource("4_i7q2i")
+region = Rect2(800, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_281of"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(400, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m5u73"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wokm2"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(0, 0, 200, 200)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn21b"]
+atlas = ExtResource("4_i7q2i")
+region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrx2g"]
 atlas = ExtResource("5_wmnxr")
@@ -354,21 +348,27 @@ region = Rect2(200, 0, 200, 200)
 [sub_resource type="SpriteFrames" id="SpriteFrames_1ynhq"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_wokm2")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_m5u73")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_281of")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_sq6ai")
+}, {
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_pka1r")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_57arg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vwooj")
-}, {
-"duration": 0.3,
-"texture": SubResource("AtlasTexture_cn21b")
 }],
 "loop": false,
 "name": &"attaque_01",
-"speed": 14.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 0.7,
@@ -573,19 +573,14 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cts3w"]
-radius = 20.4508
-height = 60.2529
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6macq"]
-radius = 15.1564
-height = 34.7705
+radius = 28.3738
+height = 75.7339
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5e4hh"]
-radius = 70.0
-height = 256.0
+radius = 53.0
+height = 194.0
 
 [node name="personnage_principal" type="CharacterBody2D"]
-collision_mask = 20
 script = SubResource("GDScript_6macq")
 
 [node name="perso_principal" type="AnimatedSprite2D" parent="."]
@@ -593,27 +588,24 @@ texture_filter = 1
 position = Vector2(454, 247)
 scale = Vector2(4.5475, 4.5475)
 sprite_frames = SubResource("SpriteFrames_1ynhq")
-animation = &"course"
+animation = &"attaque_02"
+frame = 4
+frame_progress = 0.962652
 
-[node name="HurtBox" type="Area2D" parent="perso_principal"]
+[node name="MyHitBox" type="Area2D" parent="perso_principal"]
 script = ExtResource("9_6macq")
+metadata/_custom_type_script = "uid://c6ay880i4ijpr"
 
-[node name="CollisionHurt" type="CollisionShape2D" parent="perso_principal/HurtBox"]
-position = Vector2(0.219894, -5.93733)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="perso_principal/MyHitBox"]
+position = Vector2(57.6141, -5.49753)
+rotation = 1.6028
 shape = SubResource("CapsuleShape2D_cts3w")
 
-[node name="HitBox" type="Area2D" parent="perso_principal"]
-position = Vector2(-99.8351, -54.3156)
-scale = Vector2(0.219901, 0.219901)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(441, 252)
+shape = SubResource("CapsuleShape2D_5e4hh")
+
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("9_52jtg")
-
-[node name="CollisionHit" type="CollisionShape2D" parent="perso_principal/HitBox"]
-position = Vector2(780, 229)
-scale = Vector2(11.2164, 8.76987)
-shape = SubResource("CapsuleShape2D_6macq")
-
-[node name="CollisionSol" type="CollisionShape2D" parent="."]
-position = Vector2(451, 221)
-shape = SubResource("CapsuleShape2D_5e4hh")
