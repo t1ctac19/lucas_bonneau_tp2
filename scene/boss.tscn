@@ -192,13 +192,15 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ot3je"]
 radius = 75.0
-height = 270.0
+height = 252.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nuwfj"]
 radius = 77.0
 height = 308.0
 
 [node name="boss" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 17
 script = ExtResource("1_nuwfj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -208,7 +210,7 @@ scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_cpl7b")
 animation = &"idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionSol" type="CollisionShape2D" parent="."]
 position = Vector2(873, 358)
 shape = SubResource("CapsuleShape2D_ot3je")
 

@@ -46,11 +46,7 @@ func handle_animation():
 
 
 func _on_direction_timer_timeout() -> void:
-	$DirectionTimer.wait_time = ([1.5,2.0,2.5])
+	$DirectionTimer.wait_time = [1.5,2.0,2.5].pick_random()
 	if !suit_joueur:
-		direction = choose([Vector2.RIGHT, Vector2.LEFT])
+		direction = [Vector2.RIGHT, Vector2.LEFT].pick_random()
 		velocity.x = 0
-		
-func choose(array):
-	array.shuffle()
-	return array.front

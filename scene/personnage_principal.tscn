@@ -582,7 +582,7 @@ height = 34.7705
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5e4hh"]
 radius = 70.0
-height = 256.0
+height = 234.0
 
 [node name="personnage_principal" type="CharacterBody2D"]
 collision_mask = 20
