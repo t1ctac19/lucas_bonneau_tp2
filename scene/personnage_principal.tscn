@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://4321r7vg01at"]
+[gd_scene load_steps=62 format=3 uid="uid://4321r7vg01at"]
 
 [ext_resource type="Texture2D" uid="uid://0qb33ff4juc2" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack1.png" id="3_jo3uf"]
 [ext_resource type="Texture2D" uid="uid://cu2xxnr4276tv" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack2.png" id="4_i7q2i"]
@@ -130,6 +130,13 @@ func reset_combo():
 	
 func parry():
 	pass
+	
+
+#func prendre_degats(amount):
+	#vie -= amount
+	#print(\"Le joueur prend \", amount, \" dégâts. Vie restante : \", vie)
+	#if vie <= 0:
+		#mourir()
 		
 		
 		
@@ -150,38 +157,6 @@ region = Rect2(800, 0, 200, 200)
 [sub_resource type="AtlasTexture" id="AtlasTexture_cn21b"]
 atlas = ExtResource("4_i7q2i")
 region = Rect2(1000, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5p64i"]
-atlas = ExtResource("4_i7q2i")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_01qj5"]
-atlas = ExtResource("4_i7q2i")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ef3h"]
-atlas = ExtResource("4_i7q2i")
-region = Rect2(400, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_so3tq"]
-atlas = ExtResource("4_i7q2i")
-region = Rect2(600, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sq6ai"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(600, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_281of"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(400, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m5u73"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wokm2"]
-atlas = ExtResource("3_jo3uf")
-region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrx2g"]
 atlas = ExtResource("5_wmnxr")
@@ -371,41 +346,6 @@ animations = [{
 "speed": 14.0
 }, {
 "frames": [{
-"duration": 0.7,
-"texture": SubResource("AtlasTexture_5p64i")
-}, {
-"duration": 0.7,
-"texture": SubResource("AtlasTexture_01qj5")
-}, {
-"duration": 0.7,
-"texture": SubResource("AtlasTexture_7ef3h")
-}, {
-"duration": 0.7,
-"texture": SubResource("AtlasTexture_so3tq")
-}, {
-"duration": 0.7,
-"texture": SubResource("AtlasTexture_vwooj")
-}, {
-"duration": 0.4,
-"texture": SubResource("AtlasTexture_cn21b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sq6ai")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_281of")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m5u73")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wokm2")
-}],
-"loop": false,
-"name": &"attaque_02",
-"speed": 10.0
-}, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lrx2g")
 }, {
@@ -593,7 +533,7 @@ texture_filter = 1
 position = Vector2(454, 247)
 scale = Vector2(4.5475, 4.5475)
 sprite_frames = SubResource("SpriteFrames_1ynhq")
-animation = &"course"
+animation = &"idle"
 
 [node name="HurtBox" type="Area2D" parent="perso_principal"]
 script = ExtResource("9_6macq")
