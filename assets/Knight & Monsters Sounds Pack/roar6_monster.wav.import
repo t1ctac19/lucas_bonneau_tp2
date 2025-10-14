@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://co7n8l0tv6606"
+path="res://.godot/imported/roar6_monster.wav-e52b3bbd32da7c13bfa081a3b907de88.sample"
+
+[deps]
+
+source_file="res://assets/Knight & Monsters Sounds Pack/roar6_monster.wav"
+dest_files=["res://.godot/imported/roar6_monster.wav-e52b3bbd32da7c13bfa081a3b907de88.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

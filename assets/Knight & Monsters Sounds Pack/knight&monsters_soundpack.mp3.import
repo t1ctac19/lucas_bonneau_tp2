@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c55hmmbhtuevy"
+path="res://.godot/imported/knight&monsters_soundpack.mp3-1f6fe03116051f3e74017fed124373ef.mp3str"
+
+[deps]
+
+source_file="res://assets/Knight & Monsters Sounds Pack/knight&monsters_soundpack.mp3"
+dest_files=["res://.godot/imported/knight&monsters_soundpack.mp3-1f6fe03116051f3e74017fed124373ef.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

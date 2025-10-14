@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4bqdaspus3jn"]
+
+[ext_resource type="Script" uid="uid://bghqol2gfakc3" path="res://menu_pause.gd" id="1_h31ht"]
+[ext_resource type="AudioStream" uid="uid://c1dpw74ypollu" path="res://assets/UI Soundpack/UI Soundpack/MP3/Retro1.mp3" id="2_dnu0v"]
+[ext_resource type="AudioStream" uid="uid://dfn14uq5ctqad" path="res://assets/UI Soundpack/UI Soundpack/MP3/Retro2.mp3" id="3_ij2b4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dnu0v"]
+font_size = 50
+
+[node name="menu_pause" type="CanvasLayer"]
+script = ExtResource("1_h31ht")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.5
+offset_top = -34.5
+offset_right = 72.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Pause"
+label_settings = SubResource("LabelSettings_dnu0v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="son_pause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dnu0v")
+
+[node name="son_depause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ij2b4")

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://ebkotl8bmk5l"]
+
+[ext_resource type="Script" uid="uid://bc5pkmnhemqpb" path="res://botte.gd" id="1_dx0wa"]
+[ext_resource type="Texture2D" uid="uid://rthr2ug2io5n" path="res://assets/Free - Raven Fantasy Icons/Free - Raven Fantasy Icons/Full Spritesheet/32x32.png" id="2_d2b3s"]
+[ext_resource type="AudioStream" uid="uid://d1e1x5os4n8cc" path="res://assets/UI Soundpack/UI Soundpack/MP3/modern_17.wav" id="3_d2b3s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1hux"]
+atlas = ExtResource("2_d2b3s")
+region = Rect2(320, 1312, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qd0j8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1hux")
+}],
+"loop": false,
+"name": &"speed_boost",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqieh"]
+size = Vector2(136, 141)
+
+[node name="botte" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_dx0wa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1032, 472)
+scale = Vector2(4.25, 4.25)
+sprite_frames = SubResource("SpriteFrames_qd0j8")
+animation = &"speed_boost"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1036, 470.5)
+shape = SubResource("RectangleShape2D_qqieh")
+
+[node name="son_pick_up" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_d2b3s")

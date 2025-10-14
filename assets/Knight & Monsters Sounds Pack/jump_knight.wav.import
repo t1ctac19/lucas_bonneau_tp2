@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dwgwbulut8pht"
+path="res://.godot/imported/jump_knight.wav-a7c3a0b9c9c63f64f8afc9cad6e815e0.sample"
+
+[deps]
+
+source_file="res://assets/Knight & Monsters Sounds Pack/jump_knight.wav"
+dest_files=["res://.godot/imported/jump_knight.wav-a7c3a0b9c9c63f64f8afc9cad6e815e0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

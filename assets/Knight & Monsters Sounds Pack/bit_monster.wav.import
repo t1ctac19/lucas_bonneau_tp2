@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dc5g8htnb53pd"
+path="res://.godot/imported/bit_monster.wav-d8930f92d6d6cc3eb4c9f1d2ea12830e.sample"
+
+[deps]
+
+source_file="res://assets/Knight & Monsters Sounds Pack/bit_monster.wav"
+dest_files=["res://.godot/imported/bit_monster.wav-d8930f92d6d6cc3eb4c9f1d2ea12830e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

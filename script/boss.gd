@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Boss
 
+@onready var son_attaque = $sword_attack
+
 const VITESSE = 300
 const GRAVITE = 900
 
@@ -22,6 +24,9 @@ var is_roaming: bool = true
 var peut_attaquer: bool = true
 var temps_recharge_attaque = 2.0
 var distance_attaque = 100
+
+
+
 
 func _ready():
 	direction = [Vector2.RIGHT, Vector2.LEFT].pick_random()
@@ -110,6 +115,7 @@ func _on_direction_timer_timeout() -> void:
 	if !suit_joueur:
 		direction = [Vector2.RIGHT, Vector2.LEFT].pick_random()
 		velocity.x = 0
+		
 		
 		
 

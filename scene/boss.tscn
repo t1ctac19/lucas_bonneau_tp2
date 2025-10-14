@@ -390,6 +390,8 @@ position = Vector2(873, 358)
 shape = SubResource("CapsuleShape2D_ot3je")
 
 [node name="MyHurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("4_fl70q")
 metadata/_custom_type_script = "uid://c6ay880i4ijpr"
 

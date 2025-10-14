@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://4321r7vg01at"]
+[gd_scene load_steps=63 format=3 uid="uid://4321r7vg01at"]
 
 [ext_resource type="Texture2D" uid="uid://0qb33ff4juc2" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack1.png" id="3_jo3uf"]
 [ext_resource type="Texture2D" uid="uid://cu2xxnr4276tv" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Attack2.png" id="4_i7q2i"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://deqrrng5odopf" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Take Hit - white silhouette.png" id="9_6u05i"]
 [ext_resource type="Script" uid="uid://b1jv5io3kdnr2" path="res://script/MyHitBox.gd" id="9_52jtg"]
 [ext_resource type="Texture2D" uid="uid://d2iyug4b164kh" path="res://assets/Samouraï-Pixel/Martial_Hero/Sprites/Fall.png" id="10_m4rk3"]
+[ext_resource type="AudioStream" uid="uid://c2yl2276eiql1" path="res://assets/Knight & Monsters Sounds Pack/sword_attack.wav" id="11_cts3w"]
 
 [sub_resource type="GDScript" id="GDScript_6macq"]
 script/source = "extends CharacterBody2D
@@ -25,7 +26,10 @@ script/source = "extends CharacterBody2D
 @export_range(0, 1) var deceleration_saut_relacher = 0.5
 
 @onready var sprite = $perso_principal
+@onready var son_attaque = $sword_attack
  
+
+
 #en train d'attaquer
 var combo_step = 0
 var is_attacking = false
@@ -33,7 +37,6 @@ var attack_queued = false
 var combo_timer = 0.0
 var combo_max_delay = 0.4
 var nombre_saut = 0
-
 
 
 func _physics_process(delta: float) -> void:
@@ -119,6 +122,7 @@ func start_attack(step):
 		combo_timer = 0.0
 		if step == 1:
 			sprite.play(\"attaque_01\")
+			son_attaque.play()
 		elif step == 2:
 			sprite.play(\"attaque_02\")
 
@@ -131,6 +135,8 @@ func reset_combo():
 func parry():
 	pass
 	
+	
+
 
 #func prendre_degats(amount):
 	#vie -= amount
@@ -524,7 +530,8 @@ height = 34.7705
 radius = 70.0
 height = 234.0
 
-[node name="personnage_principal" type="CharacterBody2D"]
+[node name="personnage_principal" type="CharacterBody2D" groups=["player"]]
+collision_layer = 33
 collision_mask = 20
 script = SubResource("GDScript_6macq")
 
@@ -536,6 +543,8 @@ sprite_frames = SubResource("SpriteFrames_1ynhq")
 animation = &"idle"
 
 [node name="HurtBox" type="Area2D" parent="perso_principal"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("9_6macq")
 
 [node name="CollisionHurt" type="CollisionShape2D" parent="perso_principal/HurtBox"]
@@ -557,3 +566,6 @@ shape = SubResource("CapsuleShape2D_6macq")
 [node name="CollisionSol" type="CollisionShape2D" parent="."]
 position = Vector2(451, 221)
 shape = SubResource("CapsuleShape2D_5e4hh")
+
+[node name="sword_attack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_cts3w")
